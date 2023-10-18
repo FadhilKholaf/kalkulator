@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Area Calculator</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -14,197 +15,523 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
     />
+    <script src="main.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
   </head>
-  <body class="bg-dark row row-cols-1">
-    <h1 class="text-light fw-bold text-center py-5 mb-5">Luas Bangun Datar</h1>
-    <div
-      class="container d-flex align-items-center justify-content-center grid gap-0 column-gap-5 mt-5"
-    >
-      <div class="myCard">
-        <div class="innerCard">
-          <div class="frontSide">
-            <h2>Persegi</h2>
+  <body>
+    <div class="relative pt-5">
+      <h1 class="text-light fw-bold text-center py-5 mb-5 mt-5">
+        Luas Bangun Datar
+      </h1>
+      <div
+        class="container d-flex align-items-center justify-content-center grid gap-0 column-gap-5 mt-5"
+      >
+        <div class="myCard">
+          <div class="innerCard">
+            <div class="frontSide">
+              <h2>Persegi</h2>
+            </div>
+            <div class="backSide">
+              <label for="" class="fs-5">Input Sisi :</label>
+              <input
+                type="number"
+                id="sideLengthSquare"
+                class="form-control w-75"
+              />
+              <a
+                type="button"
+                onclick="calculate('persegi')"
+                class="custom-btn btn btn-primary fs-5"
+                role="button"
+                >Hitung</a
+              >
+              <div class="fs-5" id="resultpersegi"></div>
+            </div>
           </div>
-          <div class="backSide">
-            <label for="" class="fs-5">Input Sisi :</label>
-            <input
-              type="number"
-              id="sideLengthSquare"
-              class="form-control w-75"
-            />
-            <a
-              type="button"
-              onclick="calculate('persegi')"
-              class="custom-btn btn btn-primary fs-5"
-              role="button"
-              >Hitung</a
-            >
-            <div class="fs-5" id="resultpersegi"></div>
+        </div>
+
+        <div class="myCard">
+          <div class="innerCard">
+            <div class="frontSide">
+              <h2>Persegi Panjang</h2>
+            </div>
+            <div class="backSide">
+              <label for="" class="fs-5">Input Panjang :</label>
+              <input
+                type="number"
+                id="lengthRectangle"
+                class="form-control w-75"
+              />
+              <label for="" class="fs-5">Input Lebar :</label>
+              <input
+                type="number"
+                id="widthRectangle"
+                class="form-control w-75"
+              />
+              <a
+                type="button"
+                onclick="calculate('persegi panjang')"
+                class="custom-btn btn btn-primary fs-5"
+                role="button"
+                >Hitung</a
+              >
+              <div class="fs-5" id="resultpersegi panjang"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="myCard">
+          <div class="innerCard">
+            <div class="frontSide">
+              <h2>Segitiga</h2>
+            </div>
+            <div class="backSide">
+              <label for="" class="fs-5">Input Alas :</label>
+              <input
+                type="number"
+                id="baseTriangle"
+                class="form-control w-75"
+              />
+              <label for="" class="fs-5">Input Tinggi :</label>
+              <input
+                type="number"
+                id="heightTriangle"
+                class="form-control w-75"
+              />
+              <a
+                type="button"
+                onclick="calculate('segitiga')"
+                class="custom-btn btn btn-primary fs-5"
+                role="button"
+                >Hitung</a
+              >
+              <div class="fs-5" id="resultsegitiga"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="myCard">
+          <div class="innerCard">
+            <div class="frontSide">
+              <h2>Lingkaran</h2>
+            </div>
+            <div class="backSide">
+              <label for="" class="fs-5">Input Jari Jari :</label>
+              <input
+                type="number"
+                id="radiusCircle"
+                class="form-control w-75"
+              />
+              <a
+                type="button"
+                onclick="calculate('lingkaran')"
+                class="custom-btn btn btn-primary fs-5"
+                role="button"
+                >Hitung</a
+              >
+              <div class="fs-5" id="resultlingkaran"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="myCard">
+          <div class="innerCard">
+            <div class="frontSide">
+              <h2>Belah Ketupat</h2>
+            </div>
+            <div class="backSide">
+              <label for="" class="fs-5">Input Diagonal 1 :</label>
+              <input
+                type="number"
+                id="diagonal1Rhombus"
+                class="form-control w-75"
+              />
+              <label for="" class="fs-5">Input Diagonal 2 :</label>
+              <input
+                type="number"
+                id="diagonal2Rhombus"
+                class="form-control w-75"
+              />
+              <a
+                type="button"
+                onclick="calculate('belah ketupat')"
+                class="custom-btn btn btn-primary fs-5"
+                role="button"
+                >Hitung</a
+              >
+              <div class="fs-5" id="resultbelah ketupat"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="myCard">
-        <div class="innerCard">
-          <div class="frontSide">
-            <h2>Persegi Panjang</h2>
+      <script>
+        function calculate(shape) {
+          var resultDiv = document.getElementById("result" + shape);
+          var area = 0;
+
+          switch (shape) {
+            case "persegi":
+              var side = parseFloat(
+                document.getElementById("sideLengthSquare").value
+              );
+              area = side * side;
+              break;
+            case "persegi panjang":
+              var length = parseFloat(
+                document.getElementById("lengthRectangle").value
+              );
+              var width = parseFloat(
+                document.getElementById("widthRectangle").value
+              );
+              area = length * width;
+              break;
+            case "segitiga":
+              var base = parseFloat(
+                document.getElementById("baseTriangle").value
+              );
+              var height = parseFloat(
+                document.getElementById("heightTriangle").value
+              );
+              area = 0.5 * base * height;
+              break;
+            case "lingkaran":
+              var radius = parseFloat(
+                document.getElementById("radiusCircle").value
+              );
+              area = Math.PI * radius * radius;
+              break;
+            case "belah ketupat":
+              var diagonal1 = parseFloat(
+                document.getElementById("diagonal1Rhombus").value
+              );
+              var diagonal2 = parseFloat(
+                document.getElementById("diagonal2Rhombus").value
+              );
+              area = 0.5 * diagonal1 * diagonal2;
+              break;
+            default:
+              resultDiv.innerHTML = "Nilai tidak boleh kosong";
+              return;
+          }
+
+          resultDiv.innerHTML = "Luas dari " + shape + " adalah : " + area;
+        }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <div id="not-loaded">
+      <div class="night"></div>
+      <div class="flowers">
+        <div class="flower flower--1">
+          <div class="flower__leafs flower__leafs--1">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
           </div>
-          <div class="backSide">
-            <label for="" class="fs-5">Input Panjang :</label>
-            <input
-              type="number"
-              id="lengthRectangle"
-              class="form-control w-75"
-            />
-            <label for="" class="fs-5">Input Lebar :</label>
-            <input
-              type="number"
-              id="widthRectangle"
-              class="form-control w-75"
-            />
-            <a
-              type="button"
-              onclick="calculate('persegi panjang')"
-              class="custom-btn btn btn-primary fs-5"
-              role="button"
-              >Hitung</a
-            >
-            <div class="fs-5" id="resultpersegi panjang"></div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+            <div class="flower__line__leaf flower__line__leaf--5"></div>
+            <div class="flower__line__leaf flower__line__leaf--6"></div>
           </div>
         </div>
-      </div>
 
-      <div class="myCard">
-        <div class="innerCard">
-          <div class="frontSide">
-            <h2>Segitiga</h2>
+        <div class="flower flower--2">
+          <div class="flower__leafs flower__leafs--2">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
           </div>
-          <div class="backSide">
-            Input Base:
-            <input type="number" id="baseTriangle" class="form-control w-75" />
-            Input Height:
-            <input
-              type="number"
-              id="heightTriangle"
-              class="form-control w-75"
-            />
-            <a
-              type="button"
-              onclick="calculate('segitiga')"
-              class="custom-btn btn btn-primary fs-5"
-              role="button"
-              >Hitung</a
-            >
-            <div class="fs-5" id="resultsegitiga"></div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
           </div>
         </div>
-      </div>
 
-      <div class="myCard">
-        <div class="innerCard">
-          <div class="frontSide">
-            <h2>Lingkaran</h2>
+        <div class="flower flower--3">
+          <div class="flower__leafs flower__leafs--3">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
           </div>
-          <div class="backSide">
-            Input Radius:
-            <input type="number" id="radiusCircle" class="form-control w-75" />
-            <a
-              type="button"
-              onclick="calculate('lingkaran')"
-              class="custom-btn btn btn-primary fs-5"
-              role="button"
-              >Hitung</a
-            >
-            <div class="fs-5" id="resultlingkaran"></div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
           </div>
         </div>
-      </div>
 
-      <div class="myCard">
-        <div class="innerCard">
-          <div class="frontSide">
-            <h2>Belah Ketupat</h2>
+        <div class="grow-ans" style="--d: 1.2s">
+          <div class="flower__g-long">
+            <div class="flower__g-long__top"></div>
+            <div class="flower__g-long__bottom"></div>
           </div>
-          <div class="backSide">
-            Input Diagonal 1:
-            <input
-              type="number"
-              id="diagonal1Rhombus"
-              class="form-control w-75"
-            />
-            Input Diagonal 2:
-            <input
-              type="number"
-              id="diagonal2Rhombus"
-              class="form-control w-75"
-            />
-            <a
-              type="button"
-              onclick="calculate('belah ketupat')"
-              class="custom-btn btn btn-primary fs-5"
-              role="button"
-              >Hitung</a
+        </div>
+
+        <div class="growing-grass">
+          <div class="flower__grass flower__grass--1">
+            <div class="flower__grass--top"></div>
+            <div class="flower__grass--bottom"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+            <div class="flower__grass__overlay"></div>
+          </div>
+        </div>
+
+        <div class="growing-grass">
+          <div class="flower__grass flower__grass--2">
+            <div class="flower__grass--top"></div>
+            <div class="flower__grass--bottom"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+            <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+            <div class="flower__grass__overlay"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 2.4s">
+          <div class="flower__g-right flower__g-right--1">
+            <div class="leaf"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 2.8s">
+          <div class="flower__g-right flower__g-right--2">
+            <div class="leaf"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 2.8s">
+          <div class="flower__g-front">
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1"
             >
-            <div class="fs-5" id="resultbelah ketupat"></div>
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div
+              class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8"
+            >
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__line"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3.2s">
+          <div class="flower__g-fr">
+            <div class="leaf"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--1"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--2"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--3"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--4"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--5"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--6"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--7"></div>
+            <div class="flower__g-fr__leaf flower__g-fr__leaf--8"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--0">
+          <div class="grow-ans" style="--d: 3s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 2.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.4s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--1">
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.8s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--2">
+          <div class="grow-ans" style="--d: 4s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.4s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.6s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--3">
+          <div class="grow-ans" style="--d: 4s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--4">
+          <div class="grow-ans" style="--d: 4s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--5">
+          <div class="grow-ans" style="--d: 4s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--6">
+          <div class="grow-ans" style="--d: 4.2s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.4s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.6s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 4.8s">
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="long-g long-g--7">
+          <div class="grow-ans" style="--d: 3s">
+            <div class="leaf leaf--0"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.2s">
+            <div class="leaf leaf--1"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.5s">
+            <div class="leaf leaf--2"></div>
+          </div>
+          <div class="grow-ans" style="--d: 3.6s">
+            <div class="leaf leaf--3"></div>
           </div>
         </div>
       </div>
     </div>
-
-    <script>
-      function calculate(shape) {
-        var resultDiv = document.getElementById("result" + shape);
-        var area = 0;
-
-        switch (shape) {
-          case "persegi":
-            var side = parseFloat(
-              document.getElementById("sideLengthSquare").value
-            );
-            area = side * side;
-            break;
-          case "persegi panjang":
-            var length = parseFloat(
-              document.getElementById("lengthRectangle").value
-            );
-            var width = parseFloat(
-              document.getElementById("widthRectangle").value
-            );
-            area = length * width;
-            break;
-          case "segitiga":
-            var base = parseFloat(
-              document.getElementById("baseTriangle").value
-            );
-            var height = parseFloat(
-              document.getElementById("heightTriangle").value
-            );
-            area = 0.5 * base * height;
-            break;
-          case "lingkaran":
-            var radius = parseFloat(
-              document.getElementById("radiusCircle").value
-            );
-            area = Math.PI * radius * radius;
-            break;
-          case "belah ketupat":
-            var diagonal1 = parseFloat(
-              document.getElementById("diagonal1Rhombus").value
-            );
-            var diagonal2 = parseFloat(
-              document.getElementById("diagonal2Rhombus").value
-            );
-            area = 0.5 * diagonal1 * diagonal2;
-            break;
-          default:
-            resultDiv.innerHTML = "Nilai tidak boleh kosong";
-            return;
-        }
-
-        resultDiv.innerHTML = "Luas dari " + shape + " adalah : " + area;
-      }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
